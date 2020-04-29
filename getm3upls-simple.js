@@ -9,7 +9,7 @@ $(document).ready(function() {
 function getPlaylists(playlists) {
     $('#result').html('');
     $.ajax({
-        url: '//yourwebsite.com/m3u8-PHP-Parser/m3u-parser-simple.php',
+        url: 'https://sanatv2020.github.io/testsite/m3u-parser-simple.php',
         method: 'GET',
         dataType: 'jsonP',
         data: {
