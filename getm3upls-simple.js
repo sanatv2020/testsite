@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    getPlaylists("https://pastebin.com/raw/t1mBJ2Yi");
+    getPlaylists("");
     $('#m3uForm').on('submit', function(e) {
         e.preventDefault();
         var playlists = $('#playlists').val();
