@@ -1,7 +1,7 @@
 $(document).ready(function () {
   
   //load playlist on ready
-  getPlaylists("https://pastebin.com/raw/t1mBJ2Yi");
+  getPlaylists("");
 
   $('#m3uForm').on('submit', function (e) {
     e.preventDefault();
@@ -19,7 +19,7 @@ function getPlaylists(playlists) {
   $('#result').html(''); // empty list
 
   $.ajax({
-    url: 'http://yourwebsite.com/GC-m3u-parser.php',
+    url: 'https://sanatv2020.github.io/testsite/GC-m3u-parser.php',
     method: 'GET',
     dataType: 'jsonP',
     data: {
