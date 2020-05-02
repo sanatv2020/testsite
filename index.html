@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" type="text/javascript"></script>
+<!--<script src="playerjs.js" type="text/javascript"></script>-->
+<script src="https://bit.ly/2KBwmyQ" type="text/javascript"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+<link rel="stylesheet" href="http://cdn.materialdesignicons.com/3.7.95/css/materialdesignicons.min.css">
+<style>
+
+html{
+	background-color:#000;padding:0 20px 20px 20px; 
+}
+
+
+.player{
+	border-radius:0px;
+	margin-top:20px;
+	max-width:100%;
+	border:solid 0px #191919;
+}
+.aroundplayer{
+	border-radius:0px;
+	margin:20px;
+	border:solid 0px #191919;
+}
+.scrollbar
+{
+	height: 68vh;
+	background: #000;
+	overflow-y: scroll;
+	overflow-x: hidden;
+
+}
+
+#wrapper
+{
+	text-align: center;
+	width: 100%;
+	height:100%;
+	margin: auto;
+	margin-top:30px;
+}
+
+/*
+ *  STYLE 3
+ */
+
+#style-3::-webkit-scrollbar-track
+{
+	background-color: #000;
+}
+
+#style-3::-webkit-scrollbar
+{
+	width: 1px;
+	background-color: #000;
+}
+
+#style-3::-webkit-scrollbar-thumb
+{
+	background-color: #666;
+}
+
+/*
+ *  Channels
+ */
+ .channels a{display: inline-block;
+	background: #1d2124;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    margin: 0 3px;
+    margin-bottom: 10px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10%;
+    box-shadow: 0 2px 2px 0 rgba(51, 51, 51, 0.14), 0 3px 1px -2px rgba(51, 51, 51, 0.2), 0 1px 5px 0 rgba(51, 51, 51, 0.12);}
+ .channels img{margin: auto;width:80px!important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;}
+
+.nav-tabs .nav-link.active {
+    color: #ffffff!important;
+    background-color: #0068ff!important;
+    border-color: #0068ff!important;
+}
+.nav-tabs {
+    border-bottom: 1px solid #0068ff!important;
+}
+.page-wrap {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+ }
+ .main-content {
+  width: 80%;
+}
+.main-sidebar {
+  width: 20%;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin:20px 0 0 0;
+}
+.channels1{margin:20px}
+.channels1 a{display:inline-block;padding:0px 7px 0px 7px;border-radius:3px;background: #007bff;color:white;text-decoration:none;margin: 0 0 7px 0;}
+.channels1 a:hover{background: #fff;color:#007bff;text-decoration:none}
+
+@media screen and (max-width: 960px) {
+.page-wrap{  display: block;}
+.main-content {width: 100%;display:inline-block;clear:right;}
+.main-sidebar{width:100%;height:300px;display:inline-block}
+}
+
+</style>
+
+
+<style>
+#fav{
+	display:none;
+	position:fixed;
+	z-index:1000;
+	right:10px;
+overflow-x: hidden!important;
+	overflow:scroll;
+	height:90vh;
+	background:#fff;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #000; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+#show{
+	color:#007bff;
+}
+#close{
+	padding:5px 20px;
+	border:0;
+	background:#007bff;
+	color:#fff;
+	font-size:12px;
+}
+
+
+#container {
+  margin:0;
+  width:300px;
+  position:relative;
+  background: #fff;
+}
+
+#header{
+  background: #ccc;
+  padding:20px;
+}
+
+#content {
+   padding: 5px 20px 10px 20px;
+}
+
+h2 {
+  padding:0;
+  margin:0;
+  font-weight:100;
+  color: #333;
+}
+
+ul {
+  padding: 0;
+  margin: 0px;
+}
+
+.removebtn { 
+  border:none;
+  background: none;
+  color: #999;
+  float:right;
+}
+
+.removebtn:hover {
+  opacity: 0.7;
+}
+
+ul li {
+  margin: 0;
+  list-style:none;
+}
+
+#favorite-links li {
+  padding:10px;
+  border-bottom: 1px solid #ccc;
+ 
+}
+
+#favorite-links li:last-child {
+  border:none;
+}
+
+#favorite-links a {
+  color: #333;
+  text-decoration:none;
+}
+
+#favorite-links li:hover {
+  background: #ccc;
+}
+
+#add-link-form {
+  display:none;
+  background: #444;
+  padding:20px;
+  color: #ccc;
+}
+
+#add-link-form input {
+  margin: 5px 0;
+  width:100%;
+  color: #333;
+  padding:5px;
+  outline:none;
+  border:none;
+}
+
+
+#new-link-button button, #add-link-form button {
+  margin:10px 0;
+  background: #007bff;
+  border: none;
+  color: #fff;
+  padding:5px 15px;
+  width:100%;
+  height:35px;
+}
+
+  </style>
+  
+  
+  
+
+</head>
+
+<body  style="background-color:#000;padding:20px " onload="ThrowPlaylist()">
+<center>
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-8">
+
+
+</div>
+ </form>
+
+</div>
+
+
+<div class="row">
+<div class="col-md-8">
+<div id="player" class="player"></div>
+</div>
+
+<div class="col-md-4" style="text-align:left">
+
+
+
+<input id="myInput" type="text" placeholder="Search.." type="text" class="form-control" style="color:#ccc;background-color:#000; border:solid 1px #666;margin: 18px 0px -20px 0px;font-size: 14px;width:50%;right:0px">
+
+<div id="wrapper">
+<div id="search">
+<div class="scrollbar" id="style-3">
+<span id="sample_but"></span>
+<div id="playlist_container" class="force-overflow" style=""></div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<script>document.getElementById("player").addEventListener("init",SampleInit);var player = new Playerjs({id:"player",file:[{"id":1,"title":"AnGiangTV","file":"http:\/\/vietcago.net\/vstv\/angiangtv1.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":2,"title":"ANTV","file":"http:\/\/antvlive.ab5c6921.cdnviet.com\/antv\/chunklist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/tduc.tk\/logo\/antv.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":3,"title":"ANTV","file":"http:\/\/vietcago.net\/vstv\/antv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/tduc.tk\/logo\/antv.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":4,"title":"ANTV HD","file":"http:\/\/antvlive.ab5c6921.cdnviet.com\/antv\/playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/tduc.tk\/logo\/antv.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":5,"title":"ATV","file":"http:\/\/221.133.9.35:1935\/live\/1.stream_720p\/playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/atv.org.vn\/lib\/images\/logo.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":6,"title":"ATV-TH An Giang","file":"http:\/\/221.133.9.35:1935\/live\/1.stream_240p\/playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/atv.org.vn\/lib\/images\/atv-tv.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":7,"title":"BenTreTV","file":"http:\/\/vietcago.net\/vstv\/bentretv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":8,"title":"BinhPhuocTV1","file":"http:\/\/vietcago.net\/vstv\/binhphuoctv1.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":9,"title":"BinhPhuocTV2","file":"http:\/\/vietcago.net\/vstv\/binhphuoctv2.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":10,"title":"Boruto TV","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427615r0c4ed6161b23b4d2892824141e30f13b_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":11,"title":"BPTV1 - Binh Ph\u01b0\u1edbc 1","file":"http:\/\/118.69.197.145\/hls\/bptv1.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/goo.gl\/3nWTNy","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":12,"title":"BPTV2 - Binh Ph\u01b0\u1edbc 2","file":"http:\/\/118.69.197.145\/hls\/bptv2.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/goo.gl\/q4pNNB","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":13,"title":"BRT","file":"http:\/\/113.163.216.23:1935\/live\/tv2.stream_480p\/chunklist_w1716759116.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/brt.vn\/common\/v2\/images\/Banner150219.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":14,"title":"B\u1ebfn Tre","file":"http:\/\/113.163.94.245\/hls-live\/livepkgr\/_definst_\/liveevent\/thbt.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn%3AANd9GcTFGIGk4MpV-7eFJWaeVPefzFSx8joT2yJJ76FmIkBntiQBBmov","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":15,"title":"Captain Tsubasa 2019 TV","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427630rb9a94d5f0fa60cec1044ec85fbd76da7_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":16,"title":"Cong Giao TV (VN)","file":"http:\/\/saigontvtv.saigon.ns01.us:1935\/conggiao\/myStream\/playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/ENvLdTj.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":17,"title":"C\u00e0 Mau TV","file":"http:\/\/tv.ctvcamau.vn\/live\/tv\/tv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/gWc8xVD.jpg","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":18,"title":"Da Nang TV1","file":"http:\/\/vietcago.net\/vstv\/danangtv1.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/danangtv.vn\/images\/drt1.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":19,"title":"Da Nang TV1 HD","file":"http:\/\/drtdnglive.e49a7c38.cdnviet.com\/livedrt1\/chunklist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/danangtv.vn\/images\/drt1.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":20,"title":"Da Nang TV2","file":"http:\/\/drtdnglive.e49a7c38.cdnviet.com\/livestream\/chunklist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/9I4gX5Y.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":21,"title":"DakLakTV","file":"http:\/\/vietcago.net\/vstv\/daklaktv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":22,"title":"DETECTIFE CONAN 1 TV","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427577r176a7daa9302ccecdda91e18ea9be73e_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":23,"title":"DETECTIFE CONAN 2 TV","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427561r32f86ec41ff353df5fd649beb68e6388_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":24,"title":"DETECTIFE CONAN 3 TV","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427572re6b4d2bfbd968a965107eafabdad5184_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":25,"title":"DORAEMON MOVIE","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427578r00bac8d56488f6ca2d6915fb95ab88e8_high.flv?fluxustv.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":26,"title":"DORAEMON SERIES","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427553r467469e0bc83c5de73f4d151682fb530_high.flv?fluxustv.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":27,"title":"DRAGON BALL KAI TV","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427624rcac6e81bb9277a4fe258348bcfa63c82_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":28,"title":"DRAGON BALL Z TV","file":"https:\/\/ws.flv.nimo.tv\/live\/su1599512427558r464ce7577525c715f04419095ae6abeb_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":29,"title":"DRT","file":"http:\/\/118.69.161.10:8134\/liveevent.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/gardenmedia.vn\/kcfinder\/upload\/images\/bang-gia-quang-cao-truyen-hinh-daklak.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":30,"title":"HBTV","file":"http:\/\/hoabinhtvlive.746b3ddb.cdnviet.com\/hoabinhtv\/chunklist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/BnFWgS7.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":31,"title":"HUNTER X HUNTER","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427562r89436fcde4d4278fc2e87c8600d465e1_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":32,"title":"H\u00e0 Nam","file":"http:\/\/113.160.198.111\/Medias\/HaNam\/Playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/hanamtv.vn\/template\/default\/images\/logo.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":33,"title":"H\u01b0ng Y\u00ean","file":"http:\/\/live.hungyentv.vn:1935\/live\/HYTV\/chunklist_w769520286.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/FEffTjz.jpg","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":34,"title":"H\u01b0ng Y\u00ean","file":"http:\/\/live.hungyentv.vn:1935\/live\/HYTV\/playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/uphinhnhanh.com\/images\/2019\/01\/31\/IMG_20190131_222501.jpg","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":35,"title":"INUYASHA","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427565r2d969c0672b18115ac596b0bdea6e535_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":36,"title":"KhanhHoaTV","file":"http:\/\/vietcago.net\/vstv\/khanhhoatv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":37,"title":"KienGiangTV","file":"http:\/\/tv.kgtv.vn\/live\/kgtv\/kgtv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/HqYi1Dw.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":38,"title":"KienGiangTV","file":"http:\/\/vietcago.net\/vstv\/kiengiangtv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/HqYi1Dw.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":39,"title":"KienGiangTV1","file":"http:\/\/tv.kgtv.vn\/live\/kgtv1\/kgtv1.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/vzaqu80.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":40,"title":"KienGiangTV1","file":"http:\/\/vietcago.net\/vstv\/kiengiangtv1.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/vzaqu80.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":41,"title":"KonTumTV","file":"http:\/\/117.2.88.22\/hls-live\/livepkgr\/_definst_\/liveevent\/kontumtv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/0vd4Tgb.jpg","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":42,"title":"KonTumTV","file":"http:\/\/www.vietcago.net\/vstv\/kontumtv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/0vd4Tgb.jpg","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":43,"title":"LA34 - Long An","file":"http:\/\/113.161.229.13\/hls-live\/livepkgr\/_definst_\/liveevent\/tv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/goo.gl\/DNboVb","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":44,"title":"LongAnTV","file":"http:\/\/vietcago.net\/vstv\/longantv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":45,"title":"Ngh\u1ec7 An","file":"http:\/\/113.160.173.47:8080\/live\/na1_720\/index.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/i.imgur.com\/QnGoFWZ.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":46,"title":"NHAN DAN","file":"https:\/\/5952e4052a2e8.streamlock.net\/live\/_definst_\/smil:thienviet.smil\/playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/www.htvc.vn\/uploads\/cache\/thumbnail\/2015-08-26\/8397951-logo-nhan-dan.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":47,"title":"NhanDanTV","file":"http:\/\/vietcago.net\/vstv\/thnd.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":48,"title":"Nh\u00e2n D\u00e2n","file":"https:\/\/5952e4052a2e8.streamlock.net\/live\/smil:thienviet.smil\/chunklist_w1106175008_b1544100_sleng.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/img.hplus.com.vn\/355x200\/poster\/2018\/06\/05\/606995-Nhandan.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":49,"title":"Nh\u00e2n d\u00e2n HD","file":"http:\/\/27.118.16.98:1935\/live\/truyenhinhnhandan720\/chunklist_w2006762604.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/img.hplus.com.vn\/355x200\/poster\/2018\/06\/05\/606995-Nhandan.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":50,"title":"Nh\u00e2n d\u00e2n s2","file":"https:\/\/5952e4052a2e8.streamlock.net\/live\/truyenhinhnhandan720\/chunklist_w1220145704.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/img.hplus.com.vn\/355x200\/poster\/2018\/06\/05\/606995-Nhandan.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":51,"title":"ONE PIECE TV","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427600r01fea2f56268e5a32e8e1d5c6dad7ede_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":52,"title":"ONE PUNCH MAN","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427559r6319ab6314a165d28a228bf5917d1fe0_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":53,"title":"PhuYenTV","file":"http:\/\/vietcago.net\/vstv\/phuyentv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":54,"title":"PTP - Ph\u00fa Y\u00ean","file":"http:\/\/113.161.4.48:8080\/phuyen\/tv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/goo.gl\/tDSGow","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":55,"title":"QRT","file":"http:\/\/113.161.6.157:8081\/hls-live\/livepkgr\/_definst_\/liveevent\/livestream.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/uphinhnhanh.com\/images\/2019\/01\/31\/IMG_20190131_191516.jpg","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":56,"title":"QuangNamTV","file":"http:\/\/vietcago.net\/vstv\/quangnamtv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":57,"title":"Qu\u1ed1c H\u1ed9i","file":"http:\/\/113.164.225.140:1935\/live\/quochoitvlive.stream_720p\/playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/www.quochoitv.vn\/images\/logo-qhtv.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":58,"title":"SET TV","file":"http:\/\/livestream.vnvn.net\/hls-live\/livepkgr\/_definst_\/settv574-1\/settv574-1.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/www.settv574.com\/images\/file\/sqiLlF2i1AgBAjAv\/settv574-logo.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":59,"title":"SET TV","file":"http:\/\/livestream.vnvn.net\/hls-live\/livepkgr\/_definst_\/settv574-3\/settv574-3.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/s27.postimg.org\/65e8ozu8z\/set.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":60,"title":"THGL","file":"http:\/\/113.161.25.3:8134\/hls\/gialaitv\/gialaitv.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/uphinhnhanh.com\/images\/2019\/01\/31\/IMG_20190131_213848.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":61,"title":"THHN","file":"http:\/\/113.160.198.111\/Medias\/HaNam\/480P\/playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/hanamtv.vn\/template\/default\/images\/logo.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":62,"title":"THLC","file":"http:\/\/42.112.16.101:1935\/live_\/LCTV\/chunklist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/yt3.ggpht.com\/a-\/AAuE7mDCM2WqjX5fI2SDnmBk28lqvu1-k1AkWM5-RQ=s900-mo-c-c0xffffffff-rj-k-no","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":63,"title":"Tien Giang","file":"http:\/\/thtg.vn:8001\/thtg.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/tv.vnn.vn\/Images\/tv\/tiengiang%20.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":64,"title":"TOTALLY SPIES","file":"http:\/\/ws.flv.nimo.tv\/live\/su1599512427585r47e5a2be5769b2ce776bc4a992c9f6fd_high.flv","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"","tvcountry":"VN","tvurl":"","tvgroup":"Kids"},{"id":65,"title":"TTXVN","file":"http:\/\/live.vnanet.vn\/VnewsLive_Android.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"http:\/\/img.hplus.com.vn\/355x200\/poster\/2018\/06\/05\/330504-TTXVN.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":66,"title":"TTXVN HD","file":"http:\/\/live.vnanet.vn\/720P\/playlist.m3u8","tvid":"","tvname":"TTXVN","tvlanguage":"Vietnamese","tvlogo":"http:\/\/tduc.tk\/logo\/ttxvn.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":67,"title":"VITV","file":"http:\/\/210.86.230.202:8134\/hls-live\/livepkgr\/_definst_\/liveevent\/livestream.m3u8","tvid":"","tvname":"VITV","tvlanguage":"Vietnamese","tvlogo":"http:\/\/tduc.tk\/logo\/vitv.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":68,"title":"Vi\u1ec7t M\u1ef9 TV","file":"http:\/\/68.235.37.11:1935\/vietmagazine\/vietmagazine\/playlist.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/s30.postimg.org\/s0aco3hzl\/VIET_MY.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":69,"title":"Vi\u1ec7t News TV","file":"http:\/\/vietnews.saigon.ns01.us:1935\/VietNews\/myStream\/chunklist_w107230799.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/s24.postimg.org\/sf24r4qjp\/VNTV.png","tvcountry":"VN","tvurl":"","tvgroup":"News"},{"id":70,"title":"VNA TV","file":"http:\/\/livestream.vnvn.net\/hls-live\/livepkgr\/_definst_\/vnatv573-1\/vnatv573-1.m3u8?time=1482109571065","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/s23.postimg.org\/f0ie1s30b\/VNA.png","tvcountry":"VN","tvurl":"","tvgroup":""},{"id":71,"title":"VNA TV","file":"http:\/\/livestream.vnvn.net\/hls-live\/livepkgr\/_definst_\/vnatv573-3\/vnatv573-3.m3u8","tvid":"","tvname":"","tvlanguage":"Vietnamese","tvlogo":"https:\/\/encrypted-tbn1.gstatic.com\/images?q=tbn:ANd9GcR8FyAr_hgh7a1qZJwmQbRSKyPO1UwPQiiqR4ljjfRS-QjuqWYk","tvcountry":"VN","tvurl":"","tvgroup":""}]
+
+});
+					function SampleInit(){document.getElementById("sample_but").style.display="inline";}
+					function ThrowPlaylist(){
+						player.api("moveplaylist","playlist_container");
+						document.getElementById("sample_but").style.display="block";
+					}
+
+</script>
+
+
+</center>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#playlist_container pjsdiv").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+
+<script language="javascript1.1" type="text/javascript"><!--
+if(navigator.javaEnabled())Cp+="&j=1";
+//--></script>
+<script language="javascript1.2" type="text/javascript"><!--
+if(typeof(screen)!='undefined')Cp+="&w="+screen.width+"&h="+
+screen.height+"&d="+(screen.colorDepth?screen.colorDepth:screen.pixelDepth);
+//--></script>
+
+</body>
+
+</html>
